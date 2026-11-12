@@ -8,3 +8,13 @@ variables:
   NODE_VERSION: "20.10.0"
 
 cache:
+  paths:
+    - node_modules/
+
+default:
+  image: node:${NODE_VERSION}
+  before_script:
+    - echo "USING NODE ${NODE_VERSION}"
+    - apt-get update && apt-get install -y curl
+    - curl -LO "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
+    - tar -xvf hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
